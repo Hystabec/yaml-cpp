@@ -1,8 +1,6 @@
 project "yaml-cpp"
 	kind "StaticLib"
 	language "C++"
-	cppdialect "C++20"
-	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin/intermediate/" .. outputdir .. "/%{prj.name}")
@@ -26,11 +24,23 @@ project "yaml-cpp"
 
 	filter "system:windows"
 		systemversion "latest"
+        cppdialect "C++20"
+        staticruntime "on"
+
+    filter "system:linux"
+		pic "On"
+		systemversion "latest"
+		cppdialect "C++20"
+		staticruntime "on"
 
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"
+
+    filter "configurations:Distro"
 		runtime "Release"
 		optimize "on"
