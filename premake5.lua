@@ -9,7 +9,6 @@ project "yaml-cpp"
 	{
 		"src/**.h",
 		"src/**.cpp",
-		
 		"include/**.h"
 	}
 
@@ -25,19 +24,23 @@ project "yaml-cpp"
 
 	filter "system:windows"
 		systemversion "latest"
-		cppdialect "C++17"
-		staticruntime "off"
+        cppdialect "C++20"
+        staticruntime "on"
 
-	filter "system:linux"
+    filter "system:linux"
 		pic "On"
 		systemversion "latest"
-		cppdialect "C++17"
-		staticruntime "off"
+		cppdialect "C++20"
+		staticruntime "on"
 
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"
+
+    filter "configurations:Distro"
 		runtime "Release"
 		optimize "on"
